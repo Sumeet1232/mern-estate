@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 const compareSync = bcryptjs.compareSync;
 import jwt from "jsonwebtoken";
+import { errorHandler } from "../utils/error.js";
 
 
 
