@@ -15,7 +15,7 @@ function OAuth() {
             const provider = new GoogleAuthProvider();
             const auth= getAuth(app);
 
-            const result= signInWithPopup(auth,provider);
+            const result= await signInWithPopup(auth,provider);
             console.log(result);
             
             const res= await fetch('/api/auth/google',{
@@ -24,11 +24,13 @@ function OAuth() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    name:result.fullName,
-                    email:result.email,
-                    photo:result.photoURL
+                    name:result.user.displayName,
+                    email:result.user.email,
+                    photo:result.user.photoURL
                 }),
             })
+            // const data1 = await res.json();
+            // console.log(data1); 
             const data= await res.json()
             dispatch(signInSuccess(data));
             navigate('/');
